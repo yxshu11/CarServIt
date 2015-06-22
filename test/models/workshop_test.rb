@@ -35,6 +35,13 @@ class WorkshopTest < ActiveSupport::TestCase
     assert_not @workshop.valid?
   end
   
+  test "email addresses should be saved as lower-case" do
+    mixed_case_email = "Foo@ExAMPle.CoM"
+    @workshop.email = mixed_case_email
+    @workshop.save
+    assert_equal mixed_case_email.downcase, @workshop.reload.email
+  end
+
   test "email validation should accept valid addresses" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
@@ -43,7 +50,7 @@ class WorkshopTest < ActiveSupport::TestCase
       assert @workshop.valid?, "#{valid_address.inspect} should be valid"
     end
   end
-  
+
   # Contact Test
   test "contact should be present" do
     @workshop.contact = "       "
