@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   get 'signup'	=>	'workshops#new'
 
+  resources :workshops
 end

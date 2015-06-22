@@ -1,4 +1,27 @@
 class WorkshopsController < ApplicationController
-  def new
+  
+  def show
+  	@workshop = Workshop.find(params[:id])
   end
+
+  def new
+  	@workshop = Workshop.new
+  end
+
+  def create
+  	@workshop = Workshop.new(workshop_params)
+  	if @workshop.save
+  		# Do something
+  	else
+  		render 'new'
+  	end
+
+  end
+
+  private
+
+  	def workshop_params
+  		params.require(:workshop).permit(:com_reg_num, :name, :email, :address,
+  																			:contact, :password, :password_confirmation)
+  	end
 end
