@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get 'about'   =>  'landing_pages#about'
   get 'contact' =>  'landing_pages#contact'
 
+  get 'signup'	=>	'workshops#new'
+
 end
